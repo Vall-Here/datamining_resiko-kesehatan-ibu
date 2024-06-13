@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -415,7 +415,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-model-k-nearest-neighbors-knn-dengan-code-python">Membuat Model K-Nearest Neighbors (KNN) dengan Code Python</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-model-classifier-dengan-konsep-ensemble-learning-stacking">Membuat Model Classifier dengan Konsep Ensemble Learning Stacking</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-learning-stacking-menggunakan-library-sklearn">Ensemble Learning Stacking Menggunakan Library Sklearn</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-ensemble-bagging-classifier">Membuat Ensemble Bagging Classifier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-model-ensemble-bagging-classifier">Membuat Model Ensemble Bagging Classifier</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">KESIMPULAN</a></li>
@@ -513,9 +513,7 @@ Manset tensimeter adalah alat tensimeter untuk mengukur tekanan darah. Manset in
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting ucimlrepoNote: you may need to restart the kernel to use updated packages.
-
-  Downloading ucimlrepo-0.0.7-py3-none-any.whl.metadata (5.5 kB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: ucimlrepo in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (0.0.7)
 Requirement already satisfied: pandas&gt;=1.0.0 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from ucimlrepo) (2.2.1)
 Requirement already satisfied: certifi&gt;=2020.12.5 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from ucimlrepo) (2024.2.2)
 Requirement already satisfied: numpy&lt;2,&gt;=1.22.4 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from pandas&gt;=1.0.0-&gt;ucimlrepo) (1.26.4)
@@ -523,9 +521,7 @@ Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\users\ahmad\appda
 Requirement already satisfied: pytz&gt;=2020.1 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from pandas&gt;=1.0.0-&gt;ucimlrepo) (2024.1)
 Requirement already satisfied: tzdata&gt;=2022.7 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from pandas&gt;=1.0.0-&gt;ucimlrepo) (2024.1)
 Requirement already satisfied: six&gt;=1.5 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=1.0.0-&gt;ucimlrepo) (1.16.0)
-Downloading ucimlrepo-0.0.7-py3-none-any.whl (8.0 kB)
-Installing collected packages: ucimlrepo
-Successfully installed ucimlrepo-0.0.7
+Note: you may need to restart the kernel to use updated packages.
 </pre></div>
 </div>
 </div>
@@ -961,7 +957,7 @@ Numerical Variable: Age, SystolicBP, DiastolicBP, BS, BodyTemp, HeartRate.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ahmad\AppData\Local\Temp\ipykernel_15104\1888174911.py:9: FutureWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ahmad\AppData\Local\Temp\ipykernel_18208\1888174911.py:9: FutureWarning: 
 
 Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
 
@@ -4246,13 +4242,14 @@ Model K-Nearest Neighbors (KNN) memiliki akurasi lebih tinggi dan lebih baik unt
 </section>
 <section id="membuat-model-classifier-dengan-konsep-ensemble-learning-stacking">
 <h2>Membuat Model Classifier dengan Konsep Ensemble Learning Stacking<a class="headerlink" href="#membuat-model-classifier-dengan-konsep-ensemble-learning-stacking" title="Link to this heading">#</a></h2>
+<p>p = 1 memakai manhattan, p=2 memakai euclidean</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">)</span>
 <span class="n">c1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">p1_train</span> <span class="o">=</span> <span class="n">c1</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 
-<span class="n">c2</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">)</span>
 <span class="n">c2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">p2_train</span> <span class="o">=</span> <span class="n">c2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 </pre></div>
@@ -4521,6 +4518,7 @@ Model K-Nearest Neighbors (KNN) memiliki akurasi lebih tinggi dan lebih baik unt
 
 <span class="n">gnb_model</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
 <span class="n">gnb_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_meta</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
 
 <span class="c1"># Membuat prediksi pada set test</span>
 <span class="c1"># meta_predictions = gnb_model.predict(X_test)</span>
@@ -4939,27 +4937,26 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 }
 </style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GaussianNB()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;&nbsp;GaussianNB<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.4/modules/generated/sklearn.naive_bayes.GaussianNB.html">?<span>Documentation for GaussianNB</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></label><div class="sk-toggleable__content fitted"><pre>GaussianNB()</pre></div> </div></div></div></div></div></div>
 </div>
+<p>High level = 0, Low level = 1, mid level = 2</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p1_test</span> <span class="o">=</span> <span class="n">c1</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 <span class="n">p2_test</span> <span class="o">=</span> <span class="n">c2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-<span class="n">p1_series2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">p1_test</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">y_test</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;p1_test&#39;</span><span class="p">)</span>
-<span class="n">p2_series2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">p2_test</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">y_test</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;p2_test&#39;</span><span class="p">)</span>
+<span class="n">p1_series2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">p1_test</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">y_test</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;p1&#39;</span><span class="p">)</span>
+<span class="n">p2_series2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">p2_test</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">y_test</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;p2&#39;</span><span class="p">)</span>
 
 <span class="c1"># Concatenate predictions and y_train</span>
 <span class="n">df_meta_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">p1_series2</span><span class="p">,</span> <span class="n">p2_series2</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">df_meta_test</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;p1_test&#39;</span><span class="p">,</span> <span class="s1">&#39;p2_test&#39;</span><span class="p">]</span>
+<span class="n">df_meta_test</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;p1&#39;</span><span class="p">,</span> <span class="s1">&#39;p2&#39;</span><span class="p">]</span>
 
-<span class="n">df_meta_test</span><span class="p">[</span><span class="s1">&#39;p1_test&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df_meta_test</span><span class="p">[</span><span class="s1">&#39;p1_test&#39;</span><span class="p">])</span>
-<span class="n">df_meta_test</span><span class="p">[</span><span class="s1">&#39;p2_test&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df_meta_test</span><span class="p">[</span><span class="s1">&#39;p2_test&#39;</span><span class="p">])</span>
+<span class="n">df_meta_test</span><span class="p">[</span><span class="s1">&#39;p1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df_meta_test</span><span class="p">[</span><span class="s1">&#39;p1&#39;</span><span class="p">])</span>
+<span class="n">df_meta_test</span><span class="p">[</span><span class="s1">&#39;p2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df_meta_test</span><span class="p">[</span><span class="s1">&#39;p2&#39;</span><span class="p">])</span>
 
-<span class="n">df_meta_test</span><span class="p">[[</span><span class="s1">&#39;p1_test&#39;</span><span class="p">,</span> <span class="s1">&#39;p2_test&#39;</span><span class="p">]]</span>
+<span class="n">df_meta_test</span><span class="p">[[</span><span class="s1">&#39;p1&#39;</span><span class="p">,</span> <span class="s1">&#39;p2&#39;</span><span class="p">]]</span>
 
 
 
 <span class="n">predictions</span> <span class="o">=</span> <span class="n">gnb_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">df_meta_test</span><span class="p">)</span>
-
-
 
 <span class="n">accuracy_meta</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span>
 
@@ -4968,66 +4965,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">54</span><span class="p">],</span> <span class="n">line</span> <span class="mi">17</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">df_meta_test</span><span class="p">[</span><span class="s1">&#39;p2_test&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df_meta_test</span><span class="p">[</span><span class="s1">&#39;p2_test&#39;</span><span class="p">])</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">df_meta_test</span><span class="p">[[</span><span class="s1">&#39;p1_test&#39;</span><span class="p">,</span> <span class="s1">&#39;p2_test&#39;</span><span class="p">]]</span>
-<span class="ne">---&gt; </span><span class="mi">17</span> <span class="n">predictions</span> <span class="o">=</span> <span class="n">gnb_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">df_meta_test</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="n">accuracy_meta</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="nb">print</span><span class="p">(</span><span class="n">accuracy_meta</span><span class="p">)</span>
-
-<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\naive_bayes.py:101,</span> in <span class="ni">_BaseNB.predict</span><span class="nt">(self, X)</span>
-<span class="g g-Whitespace">     </span><span class="mi">87</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">88</span><span class="sd"> Perform classification on an array of test vectors X.</span>
-<span class="g g-Whitespace">     </span><span class="mi">89</span><span class="sd"> </span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">     </span><span class="mi">98</span><span class="sd">     Predicted target values for X.</span>
-<span class="g g-Whitespace">     </span><span class="mi">99</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">100</span> <span class="n">check_is_fitted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">101</span> <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_X</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">102</span> <span class="n">jll</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_joint_log_likelihood</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">103</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">classes_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">jll</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
-
-<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\naive_bayes.py:269,</span> in <span class="ni">GaussianNB._check_X</span><span class="nt">(self, X)</span>
-<span class="g g-Whitespace">    </span><span class="mi">267</span> <span class="k">def</span> <span class="nf">_check_X</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">268</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Validate X, used only in predict* methods.&quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">269</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_data</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\base.py:608,</span> in <span class="ni">BaseEstimator._validate_data</span><span class="nt">(self, X, y, reset, validate_separately, cast_to_ndarray, **check_params)</span>
-<span class="g g-Whitespace">    </span><span class="mi">537</span> <span class="k">def</span> <span class="nf">_validate_data</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">538</span>     <span class="bp">self</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">539</span>     <span class="n">X</span><span class="o">=</span><span class="s2">&quot;no_validation&quot;</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">544</span>     <span class="o">**</span><span class="n">check_params</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">545</span> <span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">546</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Validate input data and set or check the `n_features_in_` attribute.</span>
-<span class="g g-Whitespace">    </span><span class="mi">547</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">548</span><span class="sd">     Parameters</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">606</span><span class="sd">         validated.</span>
-<span class="g g-Whitespace">    </span><span class="mi">607</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">608</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_check_feature_names</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="n">reset</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">610</span>     <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_tags</span><span class="p">()[</span><span class="s2">&quot;requires_y&quot;</span><span class="p">]:</span>
-<span class="g g-Whitespace">    </span><span class="mi">611</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">612</span>             <span class="sa">f</span><span class="s2">&quot;This </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> estimator &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">613</span>             <span class="s2">&quot;requires y to be passed, but the target y is None.&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">614</span>         <span class="p">)</span>
-
-<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\base.py:535,</span> in <span class="ni">BaseEstimator._check_feature_names</span><span class="nt">(self, X, reset)</span>
-<span class="g g-Whitespace">    </span><span class="mi">530</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">missing_names</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">unexpected_names</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">531</span>     <span class="n">message</span> <span class="o">+=</span> <span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">532</span>         <span class="s2">&quot;Feature names must be in the same order as they were in fit.</span><span class="se">\n</span><span class="s2">&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">533</span>     <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">535</span> <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-
-<span class="ne">ValueError</span>: The feature names should match those that were passed during fit.
-<span class="n">Feature</span> <span class="n">names</span> <span class="n">unseen</span> <span class="n">at</span> <span class="n">fit</span> <span class="n">time</span><span class="p">:</span>
-<span class="o">-</span> <span class="n">p1_test</span>
-<span class="o">-</span> <span class="n">p2_test</span>
-<span class="n">Feature</span> <span class="n">names</span> <span class="n">seen</span> <span class="n">at</span> <span class="n">fit</span> <span class="n">time</span><span class="p">,</span> <span class="n">yet</span> <span class="n">now</span> <span class="n">missing</span><span class="p">:</span>
-<span class="o">-</span> <span class="n">p1</span>
-<span class="o">-</span> <span class="n">p2</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8374384236453202
 </pre></div>
 </div>
 </div>
@@ -5070,29 +5008,99 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: mlxtend in /usr/local/lib/python3.9/site-packages (0.23.1)
-Requirement already satisfied: matplotlib&gt;=3.0.0 in /shared-libs/python3.9/py/lib/python3.9/site-packages (from mlxtend) (3.6.0)
-Requirement already satisfied: joblib&gt;=0.13.2 in /shared-libs/python3.9/py/lib/python3.9/site-packages (from mlxtend) (1.2.0)
-Requirement already satisfied: numpy&gt;=1.16.2 in /shared-libs/python3.9/py/lib/python3.9/site-packages (from mlxtend) (1.23.4)
-Requirement already satisfied: pandas&gt;=0.24.2 in /shared-libs/python3.9/py/lib/python3.9/site-packages (from mlxtend) (2.1.4)
-Requirement already satisfied: scikit-learn&gt;=1.0.2 in /shared-libs/python3.9/py/lib/python3.9/site-packages (from mlxtend) (1.1.2)
-Requirement already satisfied: scipy&gt;=1.2.1 in /shared-libs/python3.9/py/lib/python3.9/site-packages (from mlxtend) (1.9.3)
-Requirement already satisfied: pyparsing&gt;=2.2.1 in /shared-libs/python3.9/py-core/lib/python3.9/site-packages (from matplotlib&gt;=3.0.0-&gt;mlxtend) (3.0.9)
-Requirement already satisfied: fonttools&gt;=4.22.0 in /shared-libs/python3.9/py/lib/python3.9/site-packages (from matplotlib&gt;=3.0.0-&gt;mlxtend) (4.37.4)
-Requirement already satisfied: packaging&gt;=20.0 in /shared-libs/python3.9/py-core/lib/python3.9/site-packages (from matplotlib&gt;=3.0.0-&gt;mlxtend) (21.3)
-Requirement already satisfied: python-dateutil&gt;=2.7 in /shared-libs/python3.9/py-core/lib/python3.9/site-packages (from matplotlib&gt;=3.0.0-&gt;mlxtend) (2.8.2)
-Requirement already satisfied: pillow&gt;=6.2.0 in /shared-libs/python3.9/py/lib/python3.9/site-packages (from matplotlib&gt;=3.0.0-&gt;mlxtend) (9.2.0)
-Requirement already satisfied: contourpy&gt;=1.0.1 in /shared-libs/python3.9/py/lib/python3.9/site-packages (from matplotlib&gt;=3.0.0-&gt;mlxtend) (1.0.5)
-Requirement already satisfied: kiwisolver&gt;=1.0.1 in /shared-libs/python3.9/py/lib/python3.9/site-packages (from matplotlib&gt;=3.0.0-&gt;mlxtend) (1.4.4)
-Requirement already satisfied: cycler&gt;=0.10 in /shared-libs/python3.9/py/lib/python3.9/site-packages (from matplotlib&gt;=3.0.0-&gt;mlxtend) (0.11.0)
-Requirement already satisfied: pytz&gt;=2020.1 in /shared-libs/python3.9/py/lib/python3.9/site-packages (from pandas&gt;=0.24.2-&gt;mlxtend) (2022.5)
-Requirement already satisfied: tzdata&gt;=2022.1 in /shared-libs/python3.9/py/lib/python3.9/site-packages (from pandas&gt;=0.24.2-&gt;mlxtend) (2022.5)
-Requirement already satisfied: threadpoolctl&gt;=2.0.0 in /shared-libs/python3.9/py/lib/python3.9/site-packages (from scikit-learn&gt;=1.0.2-&gt;mlxtend) (3.1.0)
-Requirement already satisfied: six&gt;=1.5 in /shared-libs/python3.9/py-core/lib/python3.9/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib&gt;=3.0.0-&gt;mlxtend) (1.16.0)
-<span class=" -Color -Color-Yellow">WARNING: Running pip as the &#39;root&#39; user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv</span>
-
-<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">23.0.1</span> -&gt; <span class=" -Color -Color-Green">24.0</span>
-<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">python -m pip install --upgrade pip</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting mlxtend
+  Downloading mlxtend-0.23.1-py3-none-any.whl.metadata (7.3 kB)
+Requirement already satisfied: scipy&gt;=1.2.1 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from mlxtend) (1.12.0)
+Requirement already satisfied: numpy&gt;=1.16.2 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from mlxtend) (1.26.4)
+Requirement already satisfied: pandas&gt;=0.24.2 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from mlxtend) (2.2.1)
+Requirement already satisfied: scikit-learn&gt;=1.0.2 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from mlxtend) (1.4.1.post1)
+Requirement already satisfied: matplotlib&gt;=3.0.0 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from mlxtend) (3.8.3)
+Requirement already satisfied: joblib&gt;=0.13.2 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from mlxtend) (1.3.2)
+Requirement already satisfied: contourpy&gt;=1.0.1 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from matplotlib&gt;=3.0.0-&gt;mlxtend) (1.2.0)
+Requirement already satisfied: cycler&gt;=0.10 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from matplotlib&gt;=3.0.0-&gt;mlxtend) (0.12.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from matplotlib&gt;=3.0.0-&gt;mlxtend) (4.49.0)
+Requirement already satisfied: kiwisolver&gt;=1.3.1 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from matplotlib&gt;=3.0.0-&gt;mlxtend) (1.4.5)
+Requirement already satisfied: packaging&gt;=20.0 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from matplotlib&gt;=3.0.0-&gt;mlxtend) (23.2)
+Requirement already satisfied: pillow&gt;=8 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from matplotlib&gt;=3.0.0-&gt;mlxtend) (10.2.0)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from matplotlib&gt;=3.0.0-&gt;mlxtend) (3.1.1)
+Requirement already satisfied: python-dateutil&gt;=2.7 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from matplotlib&gt;=3.0.0-&gt;mlxtend) (2.8.2)
+Requirement already satisfied: pytz&gt;=2020.1 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from pandas&gt;=0.24.2-&gt;mlxtend) (2024.1)
+Requirement already satisfied: tzdata&gt;=2022.7 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from pandas&gt;=0.24.2-&gt;mlxtend) (2024.1)
+Requirement already satisfied: threadpoolctl&gt;=2.0.0 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from scikit-learn&gt;=1.0.2-&gt;mlxtend) (3.4.0)
+Requirement already satisfied: six&gt;=1.5 in c:\users\ahmad\appdata\local\programs\python\python310\lib\site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib&gt;=3.0.0-&gt;mlxtend) (1.16.0)
+Downloading mlxtend-0.23.1-py3-none-any.whl (1.4 MB)
+   ---------------------------------------- 0.0/1.4 MB ? eta -:--:--
+   ---------------------------------------- 0.0/1.4 MB ? eta -:--:--
+   ---------------------------------------- 0.0/1.4 MB ? eta -:--:--
+    --------------------------------------- 0.0/1.4 MB 435.7 kB/s eta 0:00:04
+    --------------------------------------- 0.0/1.4 MB 435.7 kB/s eta 0:00:04
+    --------------------------------------- 0.0/1.4 MB 435.7 kB/s eta 0:00:04
+    --------------------------------------- 0.0/1.4 MB 435.7 kB/s eta 0:00:04
+    --------------------------------------- 0.0/1.4 MB 435.7 kB/s eta 0:00:04
+    --------------------------------------- 0.0/1.4 MB 435.7 kB/s eta 0:00:04
+   -- ------------------------------------- 0.1/1.4 MB 227.6 kB/s eta 0:00:06
+   --- ------------------------------------ 0.1/1.4 MB 251.6 kB/s eta 0:00:06
+   --- ------------------------------------ 0.1/1.4 MB 266.9 kB/s eta 0:00:05
+   --- ------------------------------------ 0.1/1.4 MB 266.9 kB/s eta 0:00:05
+   --- ------------------------------------ 0.1/1.4 MB 266.9 kB/s eta 0:00:05
+   --- ------------------------------------ 0.1/1.4 MB 266.9 kB/s eta 0:00:05
+   ---- ----------------------------------- 0.2/1.4 MB 229.4 kB/s eta 0:00:06
+   ---- ----------------------------------- 0.2/1.4 MB 229.4 kB/s eta 0:00:06
+   ----- ---------------------------------- 0.2/1.4 MB 270.6 kB/s eta 0:00:05
+   ------ --------------------------------- 0.2/1.4 MB 288.1 kB/s eta 0:00:05
+   ------- -------------------------------- 0.3/1.4 MB 308.4 kB/s eta 0:00:04
+   ------- -------------------------------- 0.3/1.4 MB 321.5 kB/s eta 0:00:04
+   ------- -------------------------------- 0.3/1.4 MB 321.5 kB/s eta 0:00:04
+   ------- -------------------------------- 0.3/1.4 MB 321.5 kB/s eta 0:00:04
+   ------- -------------------------------- 0.3/1.4 MB 276.5 kB/s eta 0:00:05
+   ------- -------------------------------- 0.3/1.4 MB 276.5 kB/s eta 0:00:05
+   ------- -------------------------------- 0.3/1.4 MB 276.5 kB/s eta 0:00:05
+   ------------ --------------------------- 0.5/1.4 MB 385.9 kB/s eta 0:00:03
+   ------------ --------------------------- 0.5/1.4 MB 385.9 kB/s eta 0:00:03
+   ------------ --------------------------- 0.5/1.4 MB 385.9 kB/s eta 0:00:03
+   ------------ --------------------------- 0.5/1.4 MB 385.9 kB/s eta 0:00:03
+   ------------ --------------------------- 0.5/1.4 MB 385.9 kB/s eta 0:00:03
+   ------------ --------------------------- 0.5/1.4 MB 338.8 kB/s eta 0:00:03
+   ------------- -------------------------- 0.5/1.4 MB 349.3 kB/s eta 0:00:03
+   -------------- ------------------------- 0.5/1.4 MB 363.2 kB/s eta 0:00:03
+   --------------- ------------------------ 0.6/1.4 MB 368.6 kB/s eta 0:00:03
+   ---------------- ----------------------- 0.6/1.4 MB 386.5 kB/s eta 0:00:03
+   ----------------- ---------------------- 0.6/1.4 MB 395.8 kB/s eta 0:00:03
+   ------------------ --------------------- 0.7/1.4 MB 411.8 kB/s eta 0:00:02
+   ------------------- -------------------- 0.7/1.4 MB 410.3 kB/s eta 0:00:02
+   -------------------- ------------------- 0.7/1.4 MB 417.0 kB/s eta 0:00:02
+   --------------------- ------------------ 0.8/1.4 MB 431.0 kB/s eta 0:00:02
+   --------------------- ------------------ 0.8/1.4 MB 431.0 kB/s eta 0:00:02
+   --------------------- ------------------ 0.8/1.4 MB 431.0 kB/s eta 0:00:02
+   ---------------------- ----------------- 0.8/1.4 MB 413.5 kB/s eta 0:00:02
+   ---------------------- ----------------- 0.8/1.4 MB 413.5 kB/s eta 0:00:02
+   ---------------------- ----------------- 0.8/1.4 MB 413.5 kB/s eta 0:00:02
+   -------------------------- ------------- 1.0/1.4 MB 463.2 kB/s eta 0:00:02
+   -------------------------- ------------- 1.0/1.4 MB 463.2 kB/s eta 0:00:02
+   -------------------------- ------------- 1.0/1.4 MB 463.2 kB/s eta 0:00:02
+   --------------------------- ------------ 1.0/1.4 MB 446.2 kB/s eta 0:00:02
+   --------------------------- ------------ 1.0/1.4 MB 446.2 kB/s eta 0:00:02
+   --------------------------- ------------ 1.0/1.4 MB 436.9 kB/s eta 0:00:01
+   ---------------------------- ----------- 1.0/1.4 MB 441.2 kB/s eta 0:00:01
+   ------------------------------ --------- 1.1/1.4 MB 454.0 kB/s eta 0:00:01
+   ------------------------------- -------- 1.1/1.4 MB 457.8 kB/s eta 0:00:01
+   ------------------------------- -------- 1.1/1.4 MB 457.8 kB/s eta 0:00:01
+   ------------------------------- -------- 1.1/1.4 MB 457.8 kB/s eta 0:00:01
+   ------------------------------- -------- 1.1/1.4 MB 457.8 kB/s eta 0:00:01
+   ------------------------------- -------- 1.1/1.4 MB 457.8 kB/s eta 0:00:01
+   ------------------------------- -------- 1.1/1.4 MB 457.8 kB/s eta 0:00:01
+   ------------------------------- -------- 1.1/1.4 MB 457.8 kB/s eta 0:00:01
+   ------------------------------------ --- 1.3/1.4 MB 483.0 kB/s eta 0:00:01
+   ------------------------------------ --- 1.3/1.4 MB 483.0 kB/s eta 0:00:01
+   ------------------------------------ --- 1.3/1.4 MB 483.0 kB/s eta 0:00:01
+   ------------------------------------ --- 1.3/1.4 MB 483.0 kB/s eta 0:00:01
+   ------------------------------------ --- 1.3/1.4 MB 483.0 kB/s eta 0:00:01
+   ------------------------------------- -- 1.4/1.4 MB 454.3 kB/s eta 0:00:01
+   -------------------------------------- - 1.4/1.4 MB 455.0 kB/s eta 0:00:01
+   ---------------------------------------  1.4/1.4 MB 464.7 kB/s eta 0:00:01
+   ---------------------------------------- 1.4/1.4 MB 467.6 kB/s eta 0:00:00
+Installing collected packages: mlxtend
+Successfully installed mlxtend-0.23.1
 Note: you may need to restart the kernel to use updated packages.
 </pre></div>
 </div>
@@ -5259,7 +5267,6 @@ Note: you may need to restart the kernel to use updated packages.
 
 
 <span class="n">clf1</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span> <span class="s1">&#39;distance&#39;</span><span class="p">)</span>
-
 <span class="n">clf2</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">clf3</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
 <span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
@@ -5297,11 +5304,203 @@ Note: you may need to restart the kernel to use updated packages.
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3-fold cross validation:
 
-Accuracy: 0.72 (+/- 0.03) [KNN]
-Accuracy: 0.77 (+/- 0.02) [Random Forest]
+Accuracy: 0.71 (+/- 0.04) [KNN]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.77 (+/- 0.02) [Random Forest]
 Accuracy: 0.60 (+/- 0.02) [Naive Bayes]
-Accuracy: 0.76 (+/- 0.02) [StackingClassifier]
-Accuracy of StackingClassifier on test set: 0.8620689655172413
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">61</span><span class="p">],</span> <span class="n">line</span> <span class="mi">30</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="k">for</span> <span class="n">clf</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="n">clf1</span><span class="p">,</span> <span class="n">clf2</span><span class="p">,</span> <span class="n">clf3</span><span class="p">,</span> <span class="n">sclf</span><span class="p">],</span> 
+<span class="g g-Whitespace">     </span><span class="mi">24</span>                       <span class="p">[</span><span class="s1">&#39;KNN&#39;</span><span class="p">,</span> 
+<span class="g g-Whitespace">     </span><span class="mi">25</span>                        <span class="s1">&#39;Random Forest&#39;</span><span class="p">,</span> 
+<span class="g g-Whitespace">     </span><span class="mi">26</span>                        <span class="s1">&#39;Naive Bayes&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span>                        <span class="s1">&#39;StackingClassifier&#39;</span><span class="p">]):</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">30</span>         <span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">error_score</span><span class="o">=</span><span class="s1">&#39;raise&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span>         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy: </span><span class="si">%0.2f</span><span class="s2"> (+/- </span><span class="si">%0.2f</span><span class="s2">) [</span><span class="si">%s</span><span class="s2">]&quot;</span> 
+<span class="g g-Whitespace">     </span><span class="mi">32</span>               <span class="o">%</span> <span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scores</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="n">label</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span>     <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\utils\_param_validation.py:213,</span> in <span class="ni">validate_params.&lt;locals&gt;.decorator.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">207</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">208</span>     <span class="k">with</span> <span class="n">config_context</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">209</span>         <span class="n">skip_parameter_validation</span><span class="o">=</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">210</span>             <span class="n">prefer_skip_nested_validation</span> <span class="ow">or</span> <span class="n">global_skip_validation</span>
+<span class="g g-Whitespace">    </span><span class="mi">211</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">212</span>     <span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">213</span>         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">214</span> <span class="k">except</span> <span class="n">InvalidParameterError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">215</span>     <span class="c1"># When the function is just a wrapper around an estimator, we allow</span>
+<span class="g g-Whitespace">    </span><span class="mi">216</span>     <span class="c1"># the function to delegate validation to the estimator, but we replace</span>
+<span class="g g-Whitespace">    </span><span class="mi">217</span>     <span class="c1"># the name of the estimator by the name of the function in the error</span>
+<span class="g g-Whitespace">    </span><span class="mi">218</span>     <span class="c1"># message to avoid confusion.</span>
+<span class="g g-Whitespace">    </span><span class="mi">219</span>     <span class="n">msg</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">220</span>         <span class="sa">r</span><span class="s2">&quot;parameter of \w+ must be&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">221</span>         <span class="sa">f</span><span class="s2">&quot;parameter of </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__qualname__</span><span class="si">}</span><span class="s2"> must be&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">222</span>         <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span>     <span class="p">)</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\model_selection\_validation.py:719,</span> in <span class="ni">cross_val_score</span><span class="nt">(estimator, X, y, groups, scoring, cv, n_jobs, verbose, fit_params, params, pre_dispatch, error_score)</span>
+<span class="g g-Whitespace">    </span><span class="mi">716</span> <span class="c1"># To ensure multimetric format is not supported</span>
+<span class="g g-Whitespace">    </span><span class="mi">717</span> <span class="n">scorer</span> <span class="o">=</span> <span class="n">check_scoring</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">scoring</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">719</span> <span class="n">cv_results</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">720</span>     <span class="n">estimator</span><span class="o">=</span><span class="n">estimator</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">721</span>     <span class="n">X</span><span class="o">=</span><span class="n">X</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">722</span>     <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">723</span>     <span class="n">groups</span><span class="o">=</span><span class="n">groups</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">724</span>     <span class="n">scoring</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="n">scorer</span><span class="p">},</span>
+<span class="g g-Whitespace">    </span><span class="mi">725</span>     <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">726</span>     <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">727</span>     <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">728</span>     <span class="n">fit_params</span><span class="o">=</span><span class="n">fit_params</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">729</span>     <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">730</span>     <span class="n">pre_dispatch</span><span class="o">=</span><span class="n">pre_dispatch</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">731</span>     <span class="n">error_score</span><span class="o">=</span><span class="n">error_score</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">732</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">733</span> <span class="k">return</span> <span class="n">cv_results</span><span class="p">[</span><span class="s2">&quot;test_score&quot;</span><span class="p">]</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\utils\_param_validation.py:213,</span> in <span class="ni">validate_params.&lt;locals&gt;.decorator.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">207</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">208</span>     <span class="k">with</span> <span class="n">config_context</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">209</span>         <span class="n">skip_parameter_validation</span><span class="o">=</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">210</span>             <span class="n">prefer_skip_nested_validation</span> <span class="ow">or</span> <span class="n">global_skip_validation</span>
+<span class="g g-Whitespace">    </span><span class="mi">211</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">212</span>     <span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">213</span>         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">214</span> <span class="k">except</span> <span class="n">InvalidParameterError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">215</span>     <span class="c1"># When the function is just a wrapper around an estimator, we allow</span>
+<span class="g g-Whitespace">    </span><span class="mi">216</span>     <span class="c1"># the function to delegate validation to the estimator, but we replace</span>
+<span class="g g-Whitespace">    </span><span class="mi">217</span>     <span class="c1"># the name of the estimator by the name of the function in the error</span>
+<span class="g g-Whitespace">    </span><span class="mi">218</span>     <span class="c1"># message to avoid confusion.</span>
+<span class="g g-Whitespace">    </span><span class="mi">219</span>     <span class="n">msg</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">220</span>         <span class="sa">r</span><span class="s2">&quot;parameter of \w+ must be&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">221</span>         <span class="sa">f</span><span class="s2">&quot;parameter of </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__qualname__</span><span class="si">}</span><span class="s2"> must be&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">222</span>         <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span>     <span class="p">)</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\model_selection\_validation.py:430,</span> in <span class="ni">cross_validate</span><span class="nt">(estimator, X, y, groups, scoring, cv, n_jobs, verbose, fit_params, params, pre_dispatch, return_train_score, return_estimator, return_indices, error_score)</span>
+<span class="g g-Whitespace">    </span><span class="mi">427</span> <span class="c1"># We clone the estimator to make sure that all the folds are</span>
+<span class="g g-Whitespace">    </span><span class="mi">428</span> <span class="c1"># independent, and that it is pickle-able.</span>
+<span class="g g-Whitespace">    </span><span class="mi">429</span> <span class="n">parallel</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span> <span class="n">pre_dispatch</span><span class="o">=</span><span class="n">pre_dispatch</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">430</span> <span class="n">results</span> <span class="o">=</span> <span class="n">parallel</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">431</span>     <span class="n">delayed</span><span class="p">(</span><span class="n">_fit_and_score</span><span class="p">)(</span>
+<span class="g g-Whitespace">    </span><span class="mi">432</span>         <span class="n">clone</span><span class="p">(</span><span class="n">estimator</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">433</span>         <span class="n">X</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">434</span>         <span class="n">y</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">435</span>         <span class="n">scorer</span><span class="o">=</span><span class="n">scorers</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">436</span>         <span class="n">train</span><span class="o">=</span><span class="n">train</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">437</span>         <span class="n">test</span><span class="o">=</span><span class="n">test</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">438</span>         <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">439</span>         <span class="n">parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">440</span>         <span class="n">fit_params</span><span class="o">=</span><span class="n">routed_params</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">441</span>         <span class="n">score_params</span><span class="o">=</span><span class="n">routed_params</span><span class="o">.</span><span class="n">scorer</span><span class="o">.</span><span class="n">score</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">442</span>         <span class="n">return_train_score</span><span class="o">=</span><span class="n">return_train_score</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">443</span>         <span class="n">return_times</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">444</span>         <span class="n">return_estimator</span><span class="o">=</span><span class="n">return_estimator</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">445</span>         <span class="n">error_score</span><span class="o">=</span><span class="n">error_score</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">446</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">447</span>     <span class="k">for</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">indices</span>
+<span class="g g-Whitespace">    </span><span class="mi">448</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">450</span> <span class="n">_warn_or_raise_about_fit_failures</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">error_score</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">452</span> <span class="c1"># For callable scoring, the return type is only know after calling. If the</span>
+<span class="g g-Whitespace">    </span><span class="mi">453</span> <span class="c1"># return type is a dictionary, the error scores can now be inserted with</span>
+<span class="g g-Whitespace">    </span><span class="mi">454</span> <span class="c1"># the correct key.</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\utils\parallel.py:67,</span> in <span class="ni">Parallel.__call__</span><span class="nt">(self, iterable)</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span> <span class="n">config</span> <span class="o">=</span> <span class="n">get_config</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">63</span> <span class="n">iterable_with_config</span> <span class="o">=</span> <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span>     <span class="p">(</span><span class="n">_with_config</span><span class="p">(</span><span class="n">delayed_func</span><span class="p">,</span> <span class="n">config</span><span class="p">),</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span>     <span class="k">for</span> <span class="n">delayed_func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">iterable</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span> <span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">67</span> <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">iterable_with_config</span><span class="p">)</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py:1863,</span> in <span class="ni">Parallel.__call__</span><span class="nt">(self, iterable)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1861</span>     <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_sequential_output</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1862</span>     <span class="nb">next</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1863</span>     <span class="k">return</span> <span class="n">output</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_generator</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1865</span> <span class="c1"># Let&#39;s create an ID that uniquely identifies the current call. If the</span>
+<span class="g g-Whitespace">   </span><span class="mi">1866</span> <span class="c1"># call is interrupted early and that the same instance is immediately</span>
+<span class="g g-Whitespace">   </span><span class="mi">1867</span> <span class="c1"># re-used, this id will be used to prevent workers that were</span>
+<span class="g g-Whitespace">   </span><span class="mi">1868</span> <span class="c1"># concurrently finalizing a task from the previous call to run the</span>
+<span class="g g-Whitespace">   </span><span class="mi">1869</span> <span class="c1"># callback.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1870</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py:1792,</span> in <span class="ni">Parallel._get_sequential_output</span><span class="nt">(self, iterable)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1790</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_dispatched_batches</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="g g-Whitespace">   </span><span class="mi">1791</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_dispatched_tasks</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="ne">-&gt; </span><span class="mi">1792</span> <span class="n">res</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1793</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_completed_tasks</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="g g-Whitespace">   </span><span class="mi">1794</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_progress</span><span class="p">()</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\utils\parallel.py:129,</span> in <span class="ni">_FuncWrapper.__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">127</span>     <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="g g-Whitespace">    </span><span class="mi">128</span> <span class="k">with</span> <span class="n">config_context</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">129</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\model_selection\_validation.py:917,</span> in <span class="ni">_fit_and_score</span><span class="nt">(estimator, X, y, scorer, train, test, verbose, parameters, fit_params, score_params, return_train_score, return_parameters, return_n_test_samples, return_times, return_estimator, split_progress, candidate_progress, error_score)</span>
+<span class="g g-Whitespace">    </span><span class="mi">914</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;fit_error&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">    </span><span class="mi">916</span> <span class="n">fit_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+<span class="ne">--&gt; </span><span class="mi">917</span> <span class="n">test_scores</span> <span class="o">=</span> <span class="n">_score</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">918</span>     <span class="n">estimator</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">scorer</span><span class="p">,</span> <span class="n">score_params_test</span><span class="p">,</span> <span class="n">error_score</span>
+<span class="g g-Whitespace">    </span><span class="mi">919</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">920</span> <span class="n">score_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">-</span> <span class="n">fit_time</span>
+<span class="g g-Whitespace">    </span><span class="mi">921</span> <span class="k">if</span> <span class="n">return_train_score</span><span class="p">:</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\model_selection\_validation.py:982,</span> in <span class="ni">_score</span><span class="nt">(estimator, X_test, y_test, scorer, score_params, error_score)</span>
+<span class="g g-Whitespace">    </span><span class="mi">980</span>         <span class="n">scores</span> <span class="o">=</span> <span class="n">scorer</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="o">**</span><span class="n">score_params</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">981</span>     <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">982</span>         <span class="n">scores</span> <span class="o">=</span> <span class="n">scorer</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="o">**</span><span class="n">score_params</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">983</span> <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">984</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scorer</span><span class="p">,</span> <span class="n">_MultimetricScorer</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">985</span>         <span class="c1"># If `_MultimetricScorer` raises exception, the `error_score`</span>
+<span class="g g-Whitespace">    </span><span class="mi">986</span>         <span class="c1"># parameter is equal to &quot;raise&quot;.</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\metrics\_scorer.py:145,</span> in <span class="ni">_MultimetricScorer.__call__</span><span class="nt">(self, estimator, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">143</span> <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">144</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_raise_exc</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">145</span>         <span class="k">raise</span> <span class="n">e</span>
+<span class="g g-Whitespace">    </span><span class="mi">146</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">147</span>         <span class="n">scores</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">format_exc</span><span class="p">()</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\metrics\_scorer.py:137,</span> in <span class="ni">_MultimetricScorer.__call__</span><span class="nt">(self, estimator, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scorer</span><span class="p">,</span> <span class="n">_BaseScorer</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">137</span>         <span class="n">score</span> <span class="o">=</span> <span class="n">scorer</span><span class="o">.</span><span class="n">_score</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">138</span>             <span class="n">cached_call</span><span class="p">,</span> <span class="n">estimator</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">routed_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">score</span>
+<span class="g g-Whitespace">    </span><span class="mi">139</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">140</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">141</span>         <span class="n">score</span> <span class="o">=</span> <span class="n">scorer</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">routed_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">score</span><span class="p">)</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\metrics\_scorer.py:345,</span> in <span class="ni">_Scorer._score</span><span class="nt">(self, method_caller, estimator, X, y_true, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">343</span> <span class="n">pos_label</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">is_regressor</span><span class="p">(</span><span class="n">estimator</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_pos_label</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">344</span> <span class="n">response_method</span> <span class="o">=</span> <span class="n">_check_response_method</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_response_method</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">345</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">method_caller</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">346</span>     <span class="n">estimator</span><span class="p">,</span> <span class="n">response_method</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="n">pos_label</span>
+<span class="g g-Whitespace">    </span><span class="mi">347</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">349</span> <span class="n">scoring_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">}</span>
+<span class="g g-Whitespace">    </span><span class="mi">350</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sign</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_score_func</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="o">**</span><span class="n">scoring_kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\metrics\_scorer.py:87,</span> in <span class="ni">_cached_call</span><span class="nt">(cache, estimator, response_method, *args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">84</span> <span class="k">if</span> <span class="n">cache</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">response_method</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">85</span>     <span class="k">return</span> <span class="n">cache</span><span class="p">[</span><span class="n">response_method</span><span class="p">]</span>
+<span class="ne">---&gt; </span><span class="mi">87</span> <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_get_response_values</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">88</span>     <span class="n">estimator</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">response_method</span><span class="o">=</span><span class="n">response_method</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+<span class="g g-Whitespace">     </span><span class="mi">89</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">91</span> <span class="k">if</span> <span class="n">cache</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">92</span>     <span class="n">cache</span><span class="p">[</span><span class="n">response_method</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\utils\_response.py:198,</span> in <span class="ni">_get_response_values</span><span class="nt">(estimator, X, response_method, pos_label, return_response_method_used)</span>
+<span class="g g-Whitespace">    </span><span class="mi">196</span> <span class="k">if</span> <span class="n">is_classifier</span><span class="p">(</span><span class="n">estimator</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">197</span>     <span class="n">prediction_method</span> <span class="o">=</span> <span class="n">_check_response_method</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">response_method</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">198</span>     <span class="n">classes</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">classes_</span>
+<span class="g g-Whitespace">    </span><span class="mi">199</span>     <span class="n">target_type</span> <span class="o">=</span> <span class="n">type_of_target</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">201</span>     <span class="k">if</span> <span class="n">target_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="s2">&quot;multiclass&quot;</span><span class="p">):</span>
+
+<span class="ne">AttributeError</span>: &#39;StackingClassifier&#39; object has no attribute &#39;classes_&#39;
 </pre></div>
 </div>
 </div>
@@ -5360,8 +5559,8 @@ Accuracy of StackingClassifier on test set: 0.8620689655172413
 </div>
 </div>
 </section>
-<section id="membuat-ensemble-bagging-classifier">
-<h2>Membuat Ensemble Bagging Classifier<a class="headerlink" href="#membuat-ensemble-bagging-classifier" title="Link to this heading">#</a></h2>
+<section id="membuat-model-ensemble-bagging-classifier">
+<h2>Membuat Model Ensemble Bagging Classifier<a class="headerlink" href="#membuat-model-ensemble-bagging-classifier" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_train_model</span><span class="p">,</span> <span class="n">Y_train_model</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -5375,7 +5574,7 @@ Accuracy of StackingClassifier on test set: 0.8620689655172413
 <span class="n">accuracy_results</span> <span class="o">=</span> <span class="p">{}</span>
 
 <span class="c1"># Loop untuk n_estimators dari 3 sampai 20</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">21</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">51</span><span class="p">):</span>
     <span class="c1"># Membuat dan melatih BaggingClassifier dengan n_estimators yang berbeda</span>
     <span class="n">clf</span> <span class="o">=</span> <span class="n">BaggingClassifier</span><span class="p">(</span><span class="n">base_estimator</span><span class="o">=</span><span class="n">SVC</span><span class="p">(),</span> <span class="n">n_estimators</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
@@ -5414,6 +5613,36 @@ n_estimators: 17, Accuracy: 0.5812807881773399
 n_estimators: 18, Accuracy: 0.5763546798029556
 n_estimators: 19, Accuracy: 0.5862068965517241
 n_estimators: 20, Accuracy: 0.5812807881773399
+n_estimators: 21, Accuracy: 0.5812807881773399
+n_estimators: 22, Accuracy: 0.5812807881773399
+n_estimators: 23, Accuracy: 0.5862068965517241
+n_estimators: 24, Accuracy: 0.5862068965517241
+n_estimators: 25, Accuracy: 0.5862068965517241
+n_estimators: 26, Accuracy: 0.5862068965517241
+n_estimators: 27, Accuracy: 0.5812807881773399
+n_estimators: 28, Accuracy: 0.5812807881773399
+n_estimators: 29, Accuracy: 0.5812807881773399
+n_estimators: 30, Accuracy: 0.5763546798029556
+n_estimators: 31, Accuracy: 0.5812807881773399
+n_estimators: 32, Accuracy: 0.5812807881773399
+n_estimators: 33, Accuracy: 0.5862068965517241
+n_estimators: 34, Accuracy: 0.5812807881773399
+n_estimators: 35, Accuracy: 0.5862068965517241
+n_estimators: 36, Accuracy: 0.5862068965517241
+n_estimators: 37, Accuracy: 0.5862068965517241
+n_estimators: 38, Accuracy: 0.5862068965517241
+n_estimators: 39, Accuracy: 0.5862068965517241
+n_estimators: 40, Accuracy: 0.5862068965517241
+n_estimators: 41, Accuracy: 0.5862068965517241
+n_estimators: 42, Accuracy: 0.5862068965517241
+n_estimators: 43, Accuracy: 0.5862068965517241
+n_estimators: 44, Accuracy: 0.5862068965517241
+n_estimators: 45, Accuracy: 0.5862068965517241
+n_estimators: 46, Accuracy: 0.5862068965517241
+n_estimators: 47, Accuracy: 0.5862068965517241
+n_estimators: 48, Accuracy: 0.5812807881773399
+n_estimators: 49, Accuracy: 0.5862068965517241
+n_estimators: 50, Accuracy: 0.5812807881773399
 </pre></div>
 </div>
 </div>
@@ -5433,7 +5662,7 @@ BodyTemp tidak memberikan banyak informasi tetapi sebagian besar ibu di sini mem
 <li><p>Model dapat memprediksi dengan benar sekitar 83,74% kasus yang diberikan dengan KNN</p></li>
 </ul>
 <ul class="simple">
-<li><p>Model dapat memprediksi dengan benar sekitar 90,01% kasus yang diberikan dengan Ensemble Learning Stacking</p></li>
+<li><p>Model dapat memprediksi dengan benar sekitar 86,01% kasus yang diberikan dengan Ensemble Learning Stacking dengan library</p></li>
 </ul>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="keputusan">
@@ -5532,7 +5761,7 @@ Created in <span style='font-weight:600;margin-left:4px;'>Deepnote</span></a></s
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-model-k-nearest-neighbors-knn-dengan-code-python">Membuat Model K-Nearest Neighbors (KNN) dengan Code Python</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-model-classifier-dengan-konsep-ensemble-learning-stacking">Membuat Model Classifier dengan Konsep Ensemble Learning Stacking</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-learning-stacking-menggunakan-library-sklearn">Ensemble Learning Stacking Menggunakan Library Sklearn</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-ensemble-bagging-classifier">Membuat Ensemble Bagging Classifier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-model-ensemble-bagging-classifier">Membuat Model Ensemble Bagging Classifier</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">KESIMPULAN</a></li>
